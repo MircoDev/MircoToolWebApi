@@ -9,8 +9,8 @@ namespace MircoToolWebApi.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetAllToDos() 
-        { 
-        
+        {
+            return Ok();
         }
 
 
