@@ -8,7 +8,7 @@ using MircoToolWebApi.Data;
 
 #nullable disable
 
-namespace MircoToolWebApi.Migrations
+namespace Mirco.MircosTool.Data.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace MircoToolWebApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MircoToolWebApi.Entities.ToDo", b =>
+            modelBuilder.Entity("Mirco.MircosTool.Models.Entities.todo.ToDo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,28 +30,34 @@ namespace MircoToolWebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DateCreated");
 
                     b.Property<DateTime?>("DateExpiration")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DateExpiration");
 
                     b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DateUpdated");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Description");
 
-                    b.Property<int>("Priority")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsCompleted");
+
+                    b.Property<int?>("Priority")
+                        .HasColumnType("int")
+                        .HasColumnName("Priority");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ToDos");
+                    b.ToTable("TODO");
                 });
 #pragma warning restore 612, 618
         }
