@@ -98,5 +98,27 @@ namespace MircoToolWebApi.Controllers
             return Ok(todo);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ToDo>> UpdateTodo(int id, TodoDto updatedValue)
+        {
+            var todo = await _todoRepository.ReadAsync(id);
+
+            if (todo is null)
+                return NotFound("No Todo found with that key");
+
+            todo.Description = updatedValue.Description;
+            todo.IsCompleted = updatedValue.IsCompleted;
+            todo.DateExpiration = updatedValue.DateExpiration;
+            todo.Priority = updatedValue.Priority;
+            todo.DateUpdated = DateTime.Now;
+
+            int saveAsyncResult = await _todoRepository.SaveAsync();
+
+            if (saveAsyncResult == 0)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            return Ok(todo);
+        }
+
     }
 }
